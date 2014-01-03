@@ -160,6 +160,11 @@
         // If self's items does not contain this item, add it
         if (![[self items] containsObject:i]) {
             [[self items] addObject:i];
+            
+            // Discard oldest item if there are more than 100 cached items
+            if ([[self items] count] > 100) {
+                [[self items] removeObjectAtIndex:0];
+            }
         }
     }
     
