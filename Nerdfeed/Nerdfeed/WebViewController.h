@@ -9,6 +9,19 @@
 #import <Foundation/Foundation.h>
 #import "ListViewController.h"
 
+@class RSSItem;
+
 @interface WebViewController : UIViewController <ListViewControllerDelegate, UISplitViewControllerDelegate>
+
+{
+    UIToolbar *toolbar;
+    UIBarButtonItem *addFavBtn;
+    UIBarButtonItem *removeFavBtn;
+    RSSItem *favItem;
+    //void (^reloadTableView)();
+}
+
 @property (nonatomic, readonly) UIWebView *webView;
+@property (nonatomic, copy) void (^reloadTableView)();
+
 @end

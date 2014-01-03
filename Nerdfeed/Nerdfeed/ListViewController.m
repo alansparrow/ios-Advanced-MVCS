@@ -151,6 +151,9 @@
     [[[self tableView] cellForRowAtIndexPath:indexPath]
      setAccessoryType:UITableViewCellAccessoryCheckmark];
 
+    [webViewController setReloadTableView:^(){
+        [tableView reloadData];
+    }];
     [webViewController listViewController:self handleObject:entry];
 }
 
@@ -176,6 +179,12 @@
         [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
     } else {
         [cell setAccessoryType:UITableViewCellAccessoryNone];
+    }
+    
+    if ([[BNRFeedStore sharedStore] hasItemBeenLiked:item]) {
+        [cell setBackgroundColor:[UIColor colorWithRed:0.455 green:0.765 blue:0.957 alpha:1]];
+    } else {
+        [cell setBackgroundColor:[UIColor whiteColor]];
     }
     
     return cell;

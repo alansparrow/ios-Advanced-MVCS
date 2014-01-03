@@ -26,6 +26,11 @@
 
 - (void)markItemAsRead:(RSSItem *)item;
 - (BOOL)hasItemBeenRead:(RSSItem *)item;
+- (void)removeFavItem:(RSSItem *)item;
+- (void)addFavItem:(RSSItem *)item;
+
+// Return nil if NO, return #nil if YES
+- (NSManagedObject *)hasItemBeenLiked:(RSSItem *)item;
 
 @property (nonatomic, strong) NSDate *topSongsCacheDate;
 @end

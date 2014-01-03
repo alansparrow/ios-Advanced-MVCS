@@ -215,4 +215,42 @@
     return NO;
 }
 
+- (void)addFavItem:(RSSItem *)item
+{
+    if ([self hasItemBeenLiked:item]) {
+        return;
+    }
+    
+    NSManagedObject *obj = [NSEntityDescription
+                            insertNewObjectForEntityForName:@"Favorite"
+                            inManagedObjectContext:context];
+    [obj setValue:[item link] forKey:@"urlString"];
+    [context save:nil];
+}
+
+- (void)removeFavItem:(RSSItem *)item
+{
+    NSManagedObject *obj = [self hasItemBeenLiked:item];
+    if (!obj) {
+        return;
+    }
+    
+    [context deleteObject:obj];
+    [context save:nil];
+}
+
+- (NSManagedObject *)hasItemBeenLiked:(RSSItem *)item
+{
+    NSFetchRequest *req = [[NSFetchRequest alloc] initWithEntityName:@"Favorite"];
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"urlString like %@", [item link]];
+    [req setPredicate:pred];
+    NSArray *entries = [context executeFetchRequest:req error:nil];
+    
+    if ([entries count] > 0) {
+        return [entries objectAtIndex:0];
+    }
+    
+    return nil;
+}
+
 @end
