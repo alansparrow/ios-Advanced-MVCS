@@ -22,5 +22,7 @@
 - (void)trimItemTitles;
 
 - (void)addItemsFromChannel:(RSSChannel *)otherChannel;
+- (NSDictionary *)toJSONDictionary;
+- (NSData *)jsonDictionaryToData;
 
 @end

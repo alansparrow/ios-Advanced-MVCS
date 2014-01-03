@@ -19,4 +19,7 @@
 @property (nonatomic, strong) NSString *link;
 @property (nonatomic, strong) NSDate *publicationDate;
 
+
+- (NSDictionary *)toJSONDictionary;
+
 @end

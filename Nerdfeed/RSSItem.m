@@ -113,4 +113,28 @@
     return [[self link] isEqual:[object link]];
 }
 
+- (NSDictionary *)toJSONDictionary
+{
+    // Dictionary with href=link for song
+    NSDictionary *href = [NSDictionary dictionaryWithObjectsAndKeys:link, @"href", nil];
+    
+    // Dictionary with attributes=href (created above)
+    NSDictionary *attributes =[NSDictionary dictionaryWithObjectsAndKeys:href, @"attributes", nil];
+    
+    // Create the array of attributes. The .mpa (player link)
+    // is the second one; so just use two attributes
+    NSArray *jLink = [[NSArray alloc] initWithObjects:attributes, attributes, nil];
+    
+    // Dictionary with label=title of item
+    NSDictionary *label = [NSDictionary dictionaryWithObjectsAndKeys:title, @"label", nil];
+    
+    // Finally, dictionary with all of the above
+    NSDictionary *jsonDict = [NSDictionary dictionaryWithObjectsAndKeys:label, @"title",
+                              jLink, @"link", nil];
+    
+    NSLog(@"---%@+++", jsonDict);
+    
+    return jsonDict;
+}
+
 @end

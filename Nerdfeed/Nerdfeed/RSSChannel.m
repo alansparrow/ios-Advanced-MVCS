@@ -181,4 +181,54 @@
     return c;
 }
 
+- (NSDictionary *)toJSONDictionary
+{
+    NSMutableArray *dictionaryItems = [[NSMutableArray alloc] init];
+    
+    // Create the array of entries
+    for (RSSItem *i in items) {
+        [dictionaryItems addObject:[i toJSONDictionary]];
+    }
+    
+    // Dictionary with label=apple rights; this is the info of the channel
+    NSDictionary *rights = [NSDictionary dictionaryWithObjectsAndKeys:infoString,
+                            @"label", nil];
+    
+    // Dictionary with label=title rights; this is the title of the channel
+    NSDictionary *jTitle = [NSDictionary dictionaryWithObjectsAndKeys:title,
+                            @"label", nil];
+    
+    // Dictionary with feed including all of the above items
+    NSDictionary *feed = [NSDictionary dictionaryWithObjectsAndKeys:jTitle,
+                          @"title", rights, @"rights", dictionaryItems,
+                          @"entry", nil];
+    
+    // Finally, a dictionary entry with the feed as the only item
+    NSDictionary *jsonDictionary = [NSDictionary dictionaryWithObjectsAndKeys:feed,
+                                    @"feed", nil];
+    
+    NSLog(@"[[[%@]]]", jsonDictionary);
+    
+    return jsonDictionary;
+    
+}
+
+- (NSData *)jsonDictionaryToData
+{
+    // Convert the channel data to a dictionary
+    NSDictionary *jsonDictionary = [self toJSONDictionary];
+    
+    if ([NSJSONSerialization isValidJSONObject:jsonDictionary]) {
+        // Convert the json object to NSData
+        NSError *error = nil;
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:jsonDictionary
+                                                           options:kNilOptions
+                                                             error:&error];
+        if (!error) {
+            return jsonData;
+        }
+    }
+    return nil;
+}
+
 @end

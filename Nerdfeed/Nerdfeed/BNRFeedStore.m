@@ -40,17 +40,30 @@
             // return cache in completion block
             NSLog(@"Reading cache!");
             
-            RSSChannel *cachedChannel = [NSKeyedUnarchiver
-                                         unarchiveObjectWithFile:cachePath];
-            if (cachedChannel) {
-                // Execute the controller's completion block to
-                // reload its table
-                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                    block(cachedChannel, nil);
-                }];
-                
-                // Don't need to make the request, just get out of this method
-                return;
+            RSSChannel *cachedChannel = [[RSSChannel alloc] init];
+            NSData *jsonData = [NSData dataWithContentsOfFile:cachePath];
+            
+            NSLog(@"archived json data \n---%@+++", jsonData);
+            
+            if (jsonData) {
+                // Parse the JSON data into what is ultimately an NSDictionary
+                NSError *parseError = nil;
+                NSDictionary *jsonDictionary = [NSJSONSerialization
+                                                JSONObjectWithData:jsonData
+                                                options:NSJSONReadingAllowFragments
+                                                error:&parseError];
+                if (!parseError) {
+                    // Parse the dictionary into our objects
+                    [cachedChannel readFromJSONDictionary:jsonDictionary];
+                    
+                    // Execute the controller's completion block to reload its table
+                    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                        block(cachedChannel, nil);
+                    }];
+                    
+                    // Don't need to make the request, just get out of this method
+                    return;
+                }
             }
         }
     }
@@ -71,7 +84,9 @@
         // If everything went smoothly, save the channel to disk and set cache date
         if (!err) {
             [self setTopSongsCacheDate:[NSDate date]];
-            [NSKeyedArchiver archiveRootObject:obj toFile:cachePath];
+            
+            // Save the json data to the given path
+            [[obj jsonDictionaryToData] writeToFile:cachePath atomically:YES];
         }
         
         // This is the controller's completion code:

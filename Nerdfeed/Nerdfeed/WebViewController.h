@@ -18,6 +18,7 @@
     UIBarButtonItem *addFavBtn;
     UIBarButtonItem *removeFavBtn;
     RSSItem *favItem;
+    // Block is function not method so we have ()
     //void (^reloadTableView)();
 }
 
