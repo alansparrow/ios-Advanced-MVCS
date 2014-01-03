@@ -9,6 +9,7 @@
 #import "NerdfeedAppDelegate.h"
 #import "ListViewController.h"
 #import "WebViewController.h"
+#import "BNRURLCache.h"
 
 @implementation NerdfeedAppDelegate
 
@@ -18,6 +19,11 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+    
+    // Use my own caching technology
+    BNRURLCache *uc = [[BNRURLCache alloc] init];
+    [NSURLCache setSharedURLCache:uc];
+    
     ListViewController *lvc = 
         [[ListViewController alloc] initWithStyle:UITableViewStylePlain];
 
@@ -27,7 +33,7 @@
     WebViewController *wvc = [[WebViewController alloc] init];
     [lvc setWebViewController:wvc];
     
-// Check to make sure we're running on the iPad. 
+    // Check to make sure we're running on the iPad.
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
     
         // webViewController must be in a navigation controller, you'll see why later.

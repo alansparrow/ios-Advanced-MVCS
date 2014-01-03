@@ -22,6 +22,7 @@
 		BEF6CE7914BE34E400252DD7 /* BNRConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF6CE7814BE34E400252DD7 /* BNRConnection.m */; };
 		D88E845D1876B47D00BA7CC7 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D88E845C1876B47D00BA7CC7 /* CoreData.framework */; };
 		D88E84601876B49D00BA7CC7 /* Nerdfeed.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D88E845E1876B49D00BA7CC7 /* Nerdfeed.xcdatamodeld */; };
+		D88E84631876DB6300BA7CC7 /* BNRURLCache.m in Sources */ = {isa = PBXBuildFile; fileRef = D88E84621876DB6300BA7CC7 /* BNRURLCache.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,8 @@
 		BEF6CE7A14BE39CC00252DD7 /* JSONSerializable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSONSerializable.h; path = Nerdfeed/JSONSerializable.h; sourceTree = "<group>"; };
 		D88E845C1876B47D00BA7CC7 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		D88E845F1876B49D00BA7CC7 /* Nerdfeed.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Nerdfeed.xcdatamodel; sourceTree = "<group>"; };
+		D88E84611876DB6300BA7CC7 /* BNRURLCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNRURLCache.h; sourceTree = "<group>"; };
+		D88E84621876DB6300BA7CC7 /* BNRURLCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRURLCache.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +91,8 @@
 				BED69FE1141E7C340042D98C /* RSSChannel.m */,
 				BED69FE3141E7D710042D98C /* RSSItem.h */,
 				BED69FE4141E7D710042D98C /* RSSItem.m */,
+				D88E84611876DB6300BA7CC7 /* BNRURLCache.h */,
+				D88E84621876DB6300BA7CC7 /* BNRURLCache.m */,
 				BED69FCC141E79F00042D98C /* Nerdfeed */,
 				BED69FC5141E79F00042D98C /* Frameworks */,
 				BED69FC3141E79F00042D98C /* Products */,
@@ -203,6 +208,7 @@
 				BED69FE5141E7D710042D98C /* RSSItem.m in Sources */,
 				BED69FE8141E7E2F0042D98C /* WebViewController.m in Sources */,
 				BED69FEF141E81EB0042D98C /* ChannelViewController.m in Sources */,
+				D88E84631876DB6300BA7CC7 /* BNRURLCache.m in Sources */,
 				BEF6CE7514BE2D0600252DD7 /* BNRFeedStore.m in Sources */,
 				BEF6CE7914BE34E400252DD7 /* BNRConnection.m in Sources */,
 			);
